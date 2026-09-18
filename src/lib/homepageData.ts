@@ -102,11 +102,13 @@ export interface NewsItem {
 export interface EventItem {
   id: string;
   title: string;
-  type: string;
+  type?: string;
   date: string;
-  location: string;
-  prizePool: string;
-  status: string;
+  location?: string;
+  prizePool?: string;
+  status?: string;
+  actionText?: string;
+  badgeType?: string;
 }
 
 export interface PartnerItem {
@@ -410,7 +412,7 @@ export const homepageData = {
       category: "TOURNAMENT",
       date: "Apr 12, 2025",
       readTime: "3 min read",
-      image: "https://images.unsplash.com/photo-1511512578047-dfb367046420?w=600&auto=format&fit=crop&q=80",
+      image: "https://images.unsplash.com/photo-1508098682722-e99c43a406b2?w=800&auto=format&fit=crop&q=80",
     },
     {
       id: "news-2",
@@ -418,15 +420,15 @@ export const homepageData = {
       category: "SCOUTING",
       date: "Apr 10, 2025",
       readTime: "5 min read",
-      image: "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=600&auto=format&fit=crop&q=80",
+      image: "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=800&auto=format&fit=crop&q=80",
     },
     {
       id: "news-3",
-      title: "Interview with NEXA FC Manager on Season Tactics",
+      title: "Interview with NEXA FC Manager",
       category: "INTERVIEW",
-      date: "Apr 08, 2025",
+      date: "Apr 8, 2025",
       readTime: "4 min read",
-      image: "https://images.unsplash.com/photo-1579952363873-27f3bade9f55?w=600&auto=format&fit=crop&q=80",
+      image: "https://images.unsplash.com/photo-1566492031773-4f4e44671857?w=800&auto=format&fit=crop&q=80",
     },
   ],
   events: [
@@ -435,27 +437,33 @@ export const homepageData = {
       title: "Online Qualifiers",
       type: "Online Knockout",
       date: "Apr 20, 2025",
-      location: "Konami BD-01 Server",
+      location: "Konami Server",
       prizePool: "50,000 BDT",
       status: "OPEN",
+      actionText: "Register",
+      badgeType: "gold",
     },
     {
       id: "ev-2",
       title: "Grand Final - Nexa Pro League",
-      type: "LAN Esports Stage",
+      type: "LAN Stage",
       date: "May 15, 2025",
       location: "BICC Hall, Dhaka",
       prizePool: "250,000 BDT",
       status: "SELLING FAST",
+      actionText: "Details",
+      badgeType: "purple",
     },
     {
       id: "ev-3",
-      title: "Community Meetup & Exhibition",
-      type: "Community Event",
+      title: "Community Meetup",
+      type: "Meetup",
       date: "Jun 10, 2025",
-      location: "Dhanmondi Club, Dhaka",
-      prizePool: "Exhibition Trophies",
+      location: "Dhanmondi Club",
+      prizePool: "Exhibition",
       status: "UPCOMING",
+      actionText: "Details",
+      badgeType: "blue",
     },
   ],
   partners: [
