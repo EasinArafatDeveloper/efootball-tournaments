@@ -32,8 +32,8 @@ export function TopScorersAndClubs() {
             </div>
 
             <div className="bg-[#FFFFFF] border border-[#E5E7EB] rounded-2xl overflow-hidden shadow-sm">
-              <div className="overflow-x-auto">
-                <table className="w-full text-left text-xs">
+              <div className="overflow-x-auto no-scrollbar">
+                <table className="w-full text-left text-xs min-w-[440px]">
                   <thead className="bg-[#F7F8FA] text-[#5F6368] font-bold uppercase text-[10px] tracking-wider border-b border-[#E5E7EB]">
                     <tr>
                       <th className="py-2.5 px-3.5 text-center w-10">#</th>
@@ -95,7 +95,7 @@ export function TopScorersAndClubs() {
               </div>
               <Link
                 href="/rankings"
-                className="inline-flex items-center space-x-1 text-xs font-semibold text-[#111111] hover:text-[#C79A3B] transition-colors"
+                className="inline-flex items-center space-x-1 text-xs font-semibold text-[#111111] hover:text-[#C79A3B] transition-colors shrink-0 py-1"
               >
                 <span>View All</span>
                 <ArrowRight className="w-3.5 h-3.5" />
@@ -103,8 +103,8 @@ export function TopScorersAndClubs() {
             </div>
 
             <div className="bg-[#FFFFFF] border border-[#E5E7EB] rounded-2xl overflow-hidden shadow-sm">
-              <div className="overflow-x-auto">
-                <table className="w-full text-left text-xs">
+              <div className="overflow-x-auto no-scrollbar">
+                <table className="w-full text-left text-xs min-w-[440px]">
                   <thead className="bg-[#F7F8FA] text-[#5F6368] font-bold uppercase text-[10px] tracking-wider border-b border-[#E5E7EB]">
                     <tr>
                       <th className="py-2.5 px-3.5 text-center w-10">#</th>

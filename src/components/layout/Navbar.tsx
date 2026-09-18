@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   Menu,
   X,
@@ -20,13 +21,15 @@ import {
   LogOut,
   LayoutDashboard,
   ShieldAlert,
+  ArrowRight,
+  Sparkles,
 } from "lucide-react";
 import { CommandSearch } from "./CommandSearch";
 
 export function Navbar() {
   const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [mobileDrawerOpen, setMobileDrawerOpen] = useState(false);
   const [moreDropdownOpen, setMoreDropdownOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [userDropdownOpen, setUserDropdownOpen] = useState(false);
@@ -41,6 +44,21 @@ export function Navbar() {
     { label: "Rankings", href: "/rankings" },
     { label: "Transfer Market", href: "/transfer-market" },
     { label: "News", href: "/news" },
+  ];
+
+  const drawerAllLinks = [
+    { label: "Home", href: "/", icon: Swords },
+    { label: "Players", href: "/players", icon: User },
+    { label: "Clubs", href: "/clubs", icon: Shield },
+    { label: "Matches", href: "/matches", icon: Swords },
+    { label: "Tournaments", href: "/tournaments", icon: Trophy },
+    { label: "Rankings", href: "/rankings", icon: Flame },
+    { label: "Transfer Market", href: "/transfer-market", icon: Sparkles },
+    { label: "News", href: "/news", icon: Newspaper },
+    { label: "Events", href: "/events", icon: Calendar },
+    { label: "Referees", href: "/referees", icon: Scale },
+    { label: "Partners", href: "/partners", icon: ShieldAlert },
+    { label: "About", href: "/about", icon: Shield },
   ];
 
   const moreLinks = [
@@ -59,6 +77,35 @@ export function Navbar() {
     };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  useEffect(() => {
+    const handleOpenDrawerEvent = () => setMobileDrawerOpen(true);
+    window.addEventListener("open-mobile-menu", handleOpenDrawerEvent);
+    return () => window.removeEventListener("open-mobile-menu", handleOpenDrawerEvent);
+  }, []);
+
+  // Lock body scroll when mobile drawer is open
+  useEffect(() => {
+    if (mobileDrawerOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [mobileDrawerOpen]);
+
+  // Handle ESC key to close drawer
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setMobileDrawerOpen(false);
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
   }, []);
 
   useEffect(() => {
@@ -92,24 +139,24 @@ export function Navbar() {
       >
         <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
           {/* LEFT: Logo & Brand Identity */}
-          <Link href="/" className="flex items-center space-x-3 group shrink-0">
+          <Link href="/" className="flex items-center space-x-2.5 sm:space-x-3 group shrink-0 min-h-[44px] min-w-[44px]">
             <div className="w-9 h-9 rounded-lg bg-[#111111] flex items-center justify-center shadow-sm group-hover:bg-zinc-800 transition-colors">
               <span className="font-black text-white text-base tracking-tighter">N</span>
             </div>
             <div className="flex flex-col">
-              <span className="text-base font-black tracking-tight text-[#111111] flex items-center leading-none">
+              <span className="text-sm sm:text-base font-black tracking-tight text-[#111111] flex items-center leading-none">
                 NEXA<span className="text-[#C79A3B] ml-0.5">.</span>
                 <span className="ml-1 text-[10px] font-bold text-[#5F6368] uppercase tracking-wider">
                   FOOTBALL
                 </span>
               </span>
-              <span className="text-[9px] text-[#5F6368] font-medium tracking-wider uppercase">
+              <span className="text-[9px] text-[#5F6368] font-medium tracking-wider uppercase hidden xs:block">
                 eFootball Community
               </span>
             </div>
           </Link>
 
-          {/* CENTER: Desktop Navigation */}
+          {/* CENTER: Desktop Navigation (Hidden below xl) */}
           <nav className="hidden xl:flex items-center space-x-1 h-full">
             {navLinks.map((item) => {
               const active = pathname === item.href || (item.href !== "/" && pathname.startsWith(item.href));
@@ -134,6 +181,7 @@ export function Navbar() {
                 onClick={() => setMoreDropdownOpen(!moreDropdownOpen)}
                 onBlur={() => setTimeout(() => setMoreDropdownOpen(false), 200)}
                 className="flex items-center px-3 text-[13px] font-medium text-[#5F6368] hover:text-[#111111] transition-colors"
+                aria-label="More navigation links"
               >
                 More <ChevronDown className="w-3.5 h-3.5 ml-1 text-[#5F6368]" />
               </button>
@@ -154,39 +202,39 @@ export function Navbar() {
           </nav>
 
           {/* RIGHT: Action Icons & Auth */}
-          <div className="flex items-center space-x-2 sm:space-x-3 shrink-0">
-            {/* Search Icon */}
+          <div className="flex items-center space-x-1.5 sm:space-x-3 shrink-0">
+            {/* Search Icon Button (min 44x44 touch target) */}
             <button
               onClick={() => setSearchOpen(true)}
-              className="p-2 rounded-lg text-[#5F6368] hover:text-[#111111] hover:bg-[#F7F8FA] transition-colors"
+              className="flex items-center justify-center w-10 h-10 sm:w-9 sm:h-9 rounded-lg text-[#5F6368] hover:text-[#111111] hover:bg-[#F7F8FA] transition-colors min-h-[44px] min-w-[44px] sm:min-h-[36px] sm:min-w-[36px]"
               title="Search (⌘K)"
               aria-label="Search"
             >
               <Search className="w-4 h-4" />
             </button>
 
-            {/* Settings/Theme Icon */}
+            {/* Desktop Settings Icon */}
             <button
               onClick={() => setSearchOpen(true)}
-              className="p-2 rounded-lg text-[#5F6368] hover:text-[#111111] hover:bg-[#F7F8FA] transition-colors"
+              className="hidden sm:flex items-center justify-center w-9 h-9 rounded-lg text-[#5F6368] hover:text-[#111111] hover:bg-[#F7F8FA] transition-colors"
               title="Settings"
               aria-label="Settings"
             >
               <SlidersHorizontal className="w-4 h-4" />
             </button>
 
-            {/* User Profile or Auth Buttons */}
+            {/* Desktop Auth or Profile Dropdown */}
             {user ? (
-              <div className="relative">
+              <div className="relative hidden sm:block">
                 <button
                   onClick={() => setUserDropdownOpen(!userDropdownOpen)}
                   onBlur={() => setTimeout(() => setUserDropdownOpen(false), 200)}
-                  className="flex items-center space-x-2 p-1.5 rounded-lg border border-[#E5E7EB] hover:border-[#111111] transition-all bg-white"
+                  className="flex items-center space-x-2 p-1.5 rounded-lg border border-[#E5E7EB] hover:border-[#111111] transition-all bg-white min-h-[44px]"
                 >
                   <div className="w-7 h-7 rounded bg-[#111111] text-white flex items-center justify-center font-bold text-xs">
                     {user.fullName?.charAt(0) || "U"}
                   </div>
-                  <span className="text-xs font-semibold text-[#111111] hidden md:inline max-w-[100px] truncate">
+                  <span className="text-xs font-semibold text-[#111111] max-w-[100px] truncate">
                     {user.username}
                   </span>
                   <ChevronDown className="w-3 h-3 text-[#5F6368]" />
@@ -229,73 +277,183 @@ export function Navbar() {
                 )}
               </div>
             ) : (
-              <div className="flex items-center space-x-2">
+              <div className="hidden sm:flex items-center space-x-2">
                 <Link
                   href="/login"
-                  className="px-3.5 py-1.5 rounded-lg text-xs font-semibold text-[#111111] hover:bg-[#F7F8FA] transition-colors"
+                  className="px-3.5 py-1.5 rounded-lg text-xs font-semibold text-[#111111] hover:bg-[#F7F8FA] transition-colors min-h-[40px] flex items-center"
                 >
                   Login
                 </Link>
                 <Link
                   href="/register"
-                  className="px-4 py-1.5 rounded-lg text-xs font-bold bg-[#111111] text-white hover:bg-zinc-800 shadow-sm transition-all"
+                  className="px-4 py-1.5 rounded-lg text-xs font-bold bg-[#111111] text-white hover:bg-zinc-800 shadow-sm transition-all min-h-[40px] flex items-center"
                 >
                   Sign Up
                 </Link>
               </div>
             )}
 
-            {/* Mobile Hamburger Button */}
+            {/* Mobile Drawer Hamburger Button (min 44x44px touch target) */}
             <button
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="xl:hidden p-2 rounded-lg text-[#111111] hover:bg-[#F7F8FA] border border-[#E5E7EB]"
-              aria-label="Toggle menu"
+              onClick={() => setMobileDrawerOpen(true)}
+              className="xl:hidden flex items-center justify-center w-11 h-11 rounded-lg text-[#111111] hover:bg-[#F7F8FA] border border-[#E5E7EB] min-h-[44px] min-w-[44px]"
+              aria-label="Open navigation drawer"
             >
-              {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+              <Menu className="w-5 h-5" />
             </button>
           </div>
         </div>
+      </header>
 
-        {/* Mobile Navigation Drawer */}
-        {mobileMenuOpen && (
-          <div className="xl:hidden bg-white border-b border-[#E5E7EB] px-4 pt-3 pb-6 space-y-1 animate-in slide-in-from-top duration-200">
-            {navLinks.map((item) => {
-              const active = pathname === item.href || (item.href !== "/" && pathname.startsWith(item.href));
-              return (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  onClick={() => setMobileMenuOpen(false)}
-                  className={`block px-3.5 py-2.5 rounded-lg text-sm font-semibold ${
-                    active
-                      ? "text-[#111111] bg-[#F7F8FA] border-l-4 border-[#111111]"
-                      : "text-[#5F6368] hover:text-[#111111] hover:bg-[#F7F8FA]"
-                  }`}
-                >
-                  {item.label}
-                </Link>
-              );
-            })}
-            <div className="pt-3 mt-2 border-t border-[#E5E7EB] space-y-1">
-              <div className="px-3 text-[11px] font-bold text-[#5F6368] uppercase tracking-wider">More Portals</div>
-              {moreLinks.map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="block px-3.5 py-2 rounded-lg text-xs font-medium text-[#5F6368] hover:text-[#111111] hover:bg-[#F7F8FA]"
-                >
-                  {link.label}
-                </Link>
-              ))}
-            </div>
+      {/* Full-Height Animated Mobile Navigation Drawer */}
+      <AnimatePresence>
+        {mobileDrawerOpen && (
+          <div className="fixed inset-0 z-50 xl:hidden">
+            {/* Translucent Dark Backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.25 }}
+              onClick={() => setMobileDrawerOpen(false)}
+              className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+              aria-hidden="true"
+            />
+
+            {/* Slide-in Drawer from Right */}
+            <motion.div
+              initial={{ x: "100%" }}
+              animate={{ x: 0 }}
+              exit={{ x: "100%" }}
+              transition={{ type: "spring", damping: 30, stiffness: 300, duration: 0.35 }}
+              className="absolute top-0 right-0 bottom-0 w-full max-w-sm bg-white shadow-2xl flex flex-col justify-between overflow-y-auto safe-bottom-padding"
+            >
+              {/* Drawer Top Header */}
+              <div>
+                <div className="flex items-center justify-between px-5 py-4 border-b border-[#E5E7EB]">
+                  <Link
+                    href="/"
+                    onClick={() => setMobileDrawerOpen(false)}
+                    className="flex items-center space-x-2.5"
+                  >
+                    <div className="w-8 h-8 rounded-lg bg-[#111111] flex items-center justify-center text-white font-black text-sm">
+                      N
+                    </div>
+                    <span className="font-black text-sm text-[#111111] tracking-tight">
+                      NEXA<span className="text-[#C79A3B]">.</span>FOOTBALL
+                    </span>
+                  </Link>
+
+                  <button
+                    onClick={() => setMobileDrawerOpen(false)}
+                    className="flex items-center justify-center w-11 h-11 rounded-lg text-[#5F6368] hover:text-[#111111] hover:bg-[#F7F8FA] min-h-[44px] min-w-[44px]"
+                    aria-label="Close menu"
+                  >
+                    <X className="w-5 h-5" />
+                  </button>
+                </div>
+
+                {/* Quick Search Bar inside Drawer */}
+                <div className="p-4 border-b border-[#E5E7EB]">
+                  <button
+                    onClick={() => {
+                      setMobileDrawerOpen(false);
+                      setSearchOpen(true);
+                    }}
+                    className="w-full flex items-center space-x-2.5 px-3.5 py-2.5 rounded-xl bg-[#F7F8FA] border border-[#E5E7EB] text-[#5F6368] text-xs font-medium text-left min-h-[44px]"
+                  >
+                    <Search className="w-4 h-4 text-[#5F6368]" />
+                    <span>Search athletes, clubs, fixtures...</span>
+                  </button>
+                </div>
+
+                {/* All Navigation Links */}
+                <div className="px-3 py-3 space-y-1">
+                  {drawerAllLinks.map((link) => {
+                    const active = pathname === link.href || (link.href !== "/" && pathname.startsWith(link.href));
+                    const Icon = link.icon;
+
+                    return (
+                      <Link
+                        key={link.href}
+                        href={link.href}
+                        onClick={() => setMobileDrawerOpen(false)}
+                        className={`flex items-center space-x-3 px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-colors min-h-[44px] ${
+                          active
+                            ? "bg-[#111111] text-white"
+                            : "text-[#111111] hover:bg-[#F7F8FA]"
+                        }`}
+                      >
+                        <Icon className={`w-4 h-4 ${active ? "text-white" : "text-[#5F6368]"}`} />
+                        <span>{link.label}</span>
+                      </Link>
+                    );
+                  })}
+                </div>
+              </div>
+
+              {/* Drawer Bottom Actions & Auth */}
+              <div className="p-5 border-t border-[#E5E7EB] space-y-3.5 bg-[#F7F8FA]">
+                {user ? (
+                  <div className="space-y-2">
+                    <div className="flex items-center space-x-2.5 pb-2">
+                      <div className="w-8 h-8 rounded-lg bg-[#111111] text-white flex items-center justify-center font-bold text-xs">
+                        {user.fullName?.charAt(0) || "U"}
+                      </div>
+                      <div className="min-w-0">
+                        <div className="text-xs font-bold text-[#111111] truncate">{user.fullName}</div>
+                        <div className="text-[10px] text-[#5F6368] uppercase">{user.role}</div>
+                      </div>
+                    </div>
+                    <Link
+                      href="/dashboard"
+                      onClick={() => setMobileDrawerOpen(false)}
+                      className="block w-full py-2.5 text-center text-xs font-bold bg-[#111111] text-white rounded-lg min-h-[44px] flex items-center justify-center"
+                    >
+                      Athlete Dashboard
+                    </Link>
+                    <button
+                      onClick={handleLogout}
+                      className="block w-full py-2 text-center text-xs font-semibold text-rose-600 hover:underline min-h-[44px] flex items-center justify-center"
+                    >
+                      Sign Out
+                    </button>
+                  </div>
+                ) : (
+                  <div className="space-y-2">
+                    <Link
+                      href="/register"
+                      onClick={() => setMobileDrawerOpen(false)}
+                      className="block w-full py-3 text-center text-xs font-bold bg-[#111111] text-white rounded-xl shadow-sm min-h-[48px] flex items-center justify-center"
+                    >
+                      Create Account
+                    </Link>
+                    <Link
+                      href="/login"
+                      onClick={() => setMobileDrawerOpen(false)}
+                      className="block w-full py-2.5 text-center text-xs font-semibold text-[#111111] border border-[#E5E7EB] bg-white rounded-xl min-h-[44px] flex items-center justify-center"
+                    >
+                      Login to Portal
+                    </Link>
+                  </div>
+                )}
+
+                {/* Social links */}
+                <div className="pt-2 flex items-center justify-center space-x-4 text-xs text-[#5F6368]">
+                  <a href="#" className="hover:text-[#111111]">Facebook</a>
+                  <span>•</span>
+                  <a href="#" className="hover:text-[#111111]">Discord</a>
+                  <span>•</span>
+                  <a href="#" className="hover:text-[#111111]">YouTube</a>
+                </div>
+              </div>
+            </motion.div>
           </div>
         )}
-      </header>
+      </AnimatePresence>
 
       {/* Global Command Search */}
       <CommandSearch isOpen={searchOpen} onClose={() => setSearchOpen(false)} />
     </>
   );
 }
-

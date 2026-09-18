@@ -26,13 +26,13 @@ export function CommunityCTA() {
           </div>
 
           {/* Left Text Content */}
-          <div className="relative z-10 max-w-xl px-6 py-10 sm:px-10 lg:px-14 space-y-4">
-            <div className="inline-flex items-center space-x-2 px-2.5 py-1 rounded-md bg-white/10 text-slate-200 border border-white/20 text-[11px] font-bold uppercase tracking-wider">
+          <div className="relative z-10 max-w-xl px-5 py-8 sm:px-10 lg:px-14 space-y-4">
+            <div className="inline-flex items-center space-x-2 px-2.5 py-1 rounded-md bg-white/10 text-slate-200 border border-white/20 text-[10px] sm:text-[11px] font-bold uppercase tracking-wider">
               <Sparkles className="w-3.5 h-3.5 text-[#C79A3B]" />
               <span>National Ecosystem</span>
             </div>
 
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-white tracking-tight leading-tight">
+            <h2 className="text-2xl xs:text-3xl sm:text-4xl font-black text-white tracking-tight leading-tight">
               Be Part of the <br />
               <span className="text-[#C79A3B]">Movement</span>
             </h2>
@@ -41,16 +41,16 @@ export function CommunityCTA() {
               Join thousands of players, clubs and fans building a bigger eFootball community. Compete in official leagues and climb national rankings.
             </p>
 
-            <div className="flex flex-wrap items-center gap-3 pt-2">
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 sm:gap-3 pt-2">
               <Link
                 href="/register"
-                className="px-5 py-2.5 rounded-lg text-xs sm:text-sm font-bold bg-white text-[#111111] hover:bg-slate-100 transition-all shadow-sm"
+                className="w-full sm:w-auto inline-flex items-center justify-center px-6 py-3.5 sm:py-3 rounded-lg text-xs sm:text-sm font-bold bg-white text-[#111111] hover:bg-slate-100 transition-all shadow-sm min-h-[48px]"
               >
                 Create Account
               </Link>
               <Link
                 href="/about"
-                className="px-5 py-2.5 rounded-lg text-xs sm:text-sm font-semibold bg-transparent text-white border border-white/40 hover:bg-white/10 transition-all"
+                className="w-full sm:w-auto inline-flex items-center justify-center px-5 py-3.5 sm:py-3 rounded-lg text-xs sm:text-sm font-semibold bg-transparent text-white border border-white/40 hover:bg-white/10 transition-all min-h-[48px]"
               >
                 Learn More
               </Link>

@@ -94,7 +94,7 @@ export default function MatchCentrePage() {
         </div>
 
         {/* Search & Tournament filter */}
-        <div className="flex items-center space-x-3">
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
           <div className="relative flex-1 sm:w-64">
             <Search className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
             <input
@@ -102,13 +102,13 @@ export default function MatchCentrePage() {
               placeholder="Search player, club, round..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-9 pr-3 py-2 rounded-xl bg-white border border-slate-300 text-xs text-black placeholder-slate-400 focus:outline-none focus:border-black"
+              className="w-full pl-9 pr-3 py-2 rounded-xl bg-white border border-slate-300 text-xs text-black placeholder-slate-400 focus:outline-none focus:border-black min-h-[44px]"
             />
           </div>
           <select
             value={selectedTournament}
             onChange={(e) => setSelectedTournament(e.target.value)}
-            className="px-3 py-2 rounded-xl bg-white border border-slate-300 text-xs text-black focus:outline-none focus:border-black font-medium"
+            className="px-3 py-2 rounded-xl bg-white border border-slate-300 text-xs text-black focus:outline-none focus:border-black font-medium min-h-[44px]"
           >
             <option value="ALL">All Tournaments</option>
             <option value="tourn-1">National Championship 2026</option>
@@ -134,7 +134,7 @@ export default function MatchCentrePage() {
           {filtered.map((m) => (
             <div
               key={m.id}
-              className={`p-6 rounded-2xl border transition-all flex flex-col justify-between space-y-5 group ${
+              className={`p-4 sm:p-6 rounded-2xl border transition-all flex flex-col justify-between space-y-4 sm:space-y-5 group ${
                 m.status === "LIVE"
                   ? "bg-white border-rose-300 shadow-md ring-1 ring-rose-200"
                   : "bg-white border-slate-200 hover:border-black hover:shadow-md"
@@ -167,7 +167,7 @@ export default function MatchCentrePage() {
               <div className="grid grid-cols-5 items-center text-center py-2">
                 {/* Home */}
                 <div className="col-span-2 flex flex-col items-center space-y-2">
-                  <div className="w-12 h-12 rounded-xl bg-slate-100 overflow-hidden border border-slate-200 p-0.5">
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-slate-100 overflow-hidden border border-slate-200 p-0.5">
                     <img
                       src={m.homePlayer?.avatar || m.homeClub?.logo || "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=100"}
                       alt=""
@@ -175,10 +175,10 @@ export default function MatchCentrePage() {
                     />
                   </div>
                   <div>
-                    <div className="text-sm font-bold text-black group-hover:underline transition-colors truncate max-w-[130px]">
+                    <div className="text-xs sm:text-sm font-bold text-black group-hover:underline transition-colors truncate max-w-[105px] sm:max-w-[130px]">
                       {m.homePlayer?.fullName || m.homeClub?.name}
                     </div>
-                    <div className="text-[11px] text-slate-500">
+                    <div className="text-[10px] sm:text-[11px] text-slate-500 truncate max-w-[110px]">
                       {m.homeClub?.shortName || "Unattached"} • {m.homePlayer?.rating ? `${m.homePlayer.rating} OVR` : ""}
                     </div>
                   </div>
@@ -187,22 +187,22 @@ export default function MatchCentrePage() {
                 {/* Score / Time */}
                 <div className="col-span-1 flex flex-col items-center">
                   {m.status === "FINISHED" || m.status === "LIVE" ? (
-                    <div className="text-3xl font-black text-black px-3 py-1 rounded-xl bg-slate-100 border border-slate-300 font-mono shadow-sm">
+                    <div className="text-2xl sm:text-3xl font-black text-black px-2.5 sm:px-3 py-1 rounded-xl bg-slate-100 border border-slate-300 font-mono shadow-sm">
                       {m.result?.homeScore ?? 0} - {m.result?.awayScore ?? 0}
                     </div>
                   ) : (
-                    <div className="text-sm font-mono font-bold text-slate-500 px-2.5 py-1 rounded bg-slate-100 border border-slate-200">
+                    <div className="text-xs sm:text-sm font-mono font-bold text-slate-500 px-2 py-1 rounded bg-slate-100 border border-slate-200">
                       VS
                     </div>
                   )}
-                  <div className="text-[10px] text-slate-500 font-mono mt-1">
+                  <div className="text-[9px] sm:text-[10px] text-slate-500 font-mono mt-1">
                     {m.status === "LIVE" ? "75' Live" : formatTime(m.scheduledDate)}
                   </div>
                 </div>
 
                 {/* Away */}
                 <div className="col-span-2 flex flex-col items-center space-y-2">
-                  <div className="w-12 h-12 rounded-xl bg-slate-100 overflow-hidden border border-slate-200 p-0.5">
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-slate-100 overflow-hidden border border-slate-200 p-0.5">
                     <img
                       src={m.awayPlayer?.avatar || m.awayClub?.logo || "https://images.unsplash.com/photo-1579952363873-27f3bade9f55?w=100"}
                       alt=""
@@ -210,10 +210,10 @@ export default function MatchCentrePage() {
                     />
                   </div>
                   <div>
-                    <div className="text-sm font-bold text-black group-hover:underline transition-colors truncate max-w-[130px]">
+                    <div className="text-xs sm:text-sm font-bold text-black group-hover:underline transition-colors truncate max-w-[105px] sm:max-w-[130px]">
                       {m.awayPlayer?.fullName || m.awayClub?.name}
                     </div>
-                    <div className="text-[11px] text-slate-500">
+                    <div className="text-[10px] sm:text-[11px] text-slate-500 truncate max-w-[110px]">
                       {m.awayClub?.shortName || "Unattached"} • {m.awayPlayer?.rating ? `${m.awayPlayer.rating} OVR` : ""}
                     </div>
                   </div>
@@ -231,18 +231,18 @@ export default function MatchCentrePage() {
               )}
 
               {/* Bottom Footer Actions */}
-              <div className="flex items-center justify-between pt-3 border-t border-slate-100 text-xs">
+              <div className="flex flex-col xs:flex-row xs:items-center justify-between pt-3 border-t border-slate-100 text-xs gap-2.5">
                 <div className="flex items-center space-x-2 text-slate-500">
-                  <Calendar className="w-3.5 h-3.5 text-slate-700" />
+                  <Calendar className="w-3.5 h-3.5 text-slate-700 shrink-0" />
                   <span>{formatDate(m.scheduledDate)}</span>
-                  {m.referee && <span>• Ref: {m.referee.name}</span>}
+                  {m.referee && <span className="truncate">• Ref: {m.referee.name}</span>}
                 </div>
 
                 <div className="flex items-center space-x-2">
                   {m.isOnStream && (
                     <Link
                       href={`/matches/${m.id}`}
-                      className="px-3 py-1.5 rounded-lg bg-rose-50 text-rose-700 border border-rose-200 font-bold hover:bg-rose-100 transition-colors flex items-center space-x-1"
+                      className="flex-1 xs:flex-none justify-center px-3 py-2 rounded-lg bg-rose-50 text-rose-700 border border-rose-200 font-bold hover:bg-rose-100 transition-colors flex items-center space-x-1 min-h-[44px]"
                     >
                       <Play className="w-3 h-3 fill-rose-600" />
                       <span>Watch Stream</span>
@@ -250,7 +250,7 @@ export default function MatchCentrePage() {
                   )}
                   <Link
                     href={`/matches/${m.id}`}
-                    className="px-3.5 py-1.5 rounded-lg bg-black text-white font-bold hover:bg-zinc-800 transition-colors shadow-sm"
+                    className="flex-1 xs:flex-none text-center px-3.5 py-2 rounded-lg bg-black text-white font-bold hover:bg-zinc-800 transition-colors shadow-sm min-h-[44px] flex items-center justify-center"
                   >
                     Match Details
                   </Link>

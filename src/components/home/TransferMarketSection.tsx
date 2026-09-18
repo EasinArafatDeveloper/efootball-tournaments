@@ -62,15 +62,15 @@ export function TransferMarketSection() {
           </Link>
         </div>
 
-        {/* Section Content: Player Cards (Left) + Promo Banner (Right) */}
+        {/* Section Content: Player Cards (Left) + Promo Banner (Right on Desktop, Below on Mobile) */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 items-stretch">
           
-          {/* Player Cards (8 Cols) */}
-          <div className="lg:col-span-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
+          {/* Player Cards: Horizontal Snap-Scroll on Mobile, Grid on Tablet/Desktop (8 Cols) */}
+          <div className="lg:col-span-8 flex overflow-x-auto sm:grid sm:grid-cols-2 md:grid-cols-3 gap-3 no-scrollbar snap-x snap-mandatory -mx-4 px-4 sm:mx-0 sm:px-0 pb-1">
             {transferPlayers.slice(0, 6).map((player: TransferPlayerItem) => (
               <div
                 key={player.id}
-                className="bg-[#FFFFFF] border border-[#E5E7EB] hover:border-[#111111] rounded-xl p-3.5 flex flex-col justify-between transition-all shadow-sm hover:shadow-md"
+                className="w-[160px] sm:w-auto shrink-0 snap-start bg-[#FFFFFF] border border-[#E5E7EB] hover:border-[#111111] rounded-xl p-3 sm:p-3.5 flex flex-col justify-between transition-all shadow-sm hover:shadow-md"
               >
                 <div className="flex items-start justify-between">
                   <div className="flex items-center space-x-2.5">
@@ -84,10 +84,10 @@ export function TransferMarketSection() {
                     </div>
                     <div>
                       <div className="text-xs font-bold text-[#111111] flex items-center space-x-1">
-                        <span className="truncate max-w-[100px]">{player.name}</span>
-                        <span>{player.flag}</span>
+                        <span className="truncate max-w-[85px] sm:max-w-[100px]">{player.name}</span>
+                        <span className="text-[11px]">{player.flag}</span>
                       </div>
-                      <div className="text-[10px] text-[#5F6368] font-medium truncate max-w-[120px]">
+                      <div className="text-[10px] text-[#5F6368] font-medium truncate max-w-[110px]">
                         {player.position}
                       </div>
                     </div>
@@ -97,7 +97,7 @@ export function TransferMarketSection() {
                 <div className="mt-3 pt-2.5 border-t border-[#F7F8FA] flex items-center justify-between">
                   <div>{getStatusBadge(player.status)}</div>
                   <div className="text-right">
-                    <span className="text-[10px] text-[#5F6368] block leading-none">Valuation</span>
+                    <span className="text-[9px] sm:text-[10px] text-[#5F6368] block leading-none">Valuation</span>
                     <span className="text-xs font-black text-[#111111] font-mono">{player.marketValue}</span>
                   </div>
                 </div>
@@ -105,8 +105,8 @@ export function TransferMarketSection() {
             ))}
           </div>
 
-          {/* Large Promo Card (4 Cols) */}
-          <div className="lg:col-span-4 rounded-2xl bg-[#111111] text-white p-6 sm:p-7 flex flex-col justify-between relative overflow-hidden shadow-md">
+          {/* Large Promo Card: Full Width on Mobile/Tablet Below Cards, 4 Cols on Desktop */}
+          <div className="lg:col-span-4 rounded-2xl bg-[#111111] text-white p-6 sm:p-7 flex flex-col justify-between relative overflow-hidden shadow-md min-h-[220px]">
             {/* Subtle background graphic */}
             <div className="absolute right-0 bottom-0 opacity-20 w-48 h-48 pointer-events-none">
               <Image
@@ -117,24 +117,24 @@ export function TransferMarketSection() {
               />
             </div>
 
-            <div className="relative z-10 space-y-3">
+            <div className="relative z-10 space-y-2.5 sm:space-y-3">
               <div className="inline-flex items-center space-x-1.5 px-2.5 py-1 rounded-md text-[10px] font-bold uppercase bg-white/10 text-slate-200 border border-white/20">
                 <Sparkles className="w-3 h-3 text-[#C79A3B]" />
                 <span>Squad Building</span>
               </div>
-              <h3 className="text-2xl sm:text-3xl font-black text-white leading-tight">
-                Find Your <br />
+              <h3 className="text-xl sm:text-2xl lg:text-3xl font-black text-white leading-tight">
+                Find Your <br className="hidden sm:inline" />
                 <span className="text-[#C79A3B]">Next Star</span>
               </h3>
-              <p className="text-xs text-slate-300 font-normal leading-relaxed max-w-xs">
+              <p className="text-xs text-slate-300 font-normal leading-relaxed max-w-xs sm:max-w-none">
                 Search verified athlete portfolios, compare market valuations, and negotiate buyout proposals.
               </p>
             </div>
 
-            <div className="relative z-10 pt-6">
+            <div className="relative z-10 pt-5 sm:pt-6">
               <Link
                 href="/transfer-market"
-                className="inline-flex items-center space-x-2 px-5 py-2.5 rounded-lg text-xs font-bold bg-white text-[#111111] hover:bg-slate-100 transition-all shadow-sm"
+                className="w-full sm:w-auto inline-flex items-center justify-center space-x-2 px-5 py-3 sm:py-2.5 rounded-lg text-xs font-bold bg-white text-[#111111] hover:bg-slate-100 transition-all shadow-sm min-h-[48px] sm:min-h-[40px]"
               >
                 <span>Browse Transfer Market</span>
                 <ArrowRight className="w-3.5 h-3.5" />

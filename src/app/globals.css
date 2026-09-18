@@ -100,10 +100,21 @@ body {
   box-shadow: 0 0 15px -3px rgba(0, 0, 0, 0.1);
 }
 
-/* Light Pitch Grid Background */
-.pitch-grid {
-  background-size: 40px 40px;
-  background-image: 
-    linear-gradient(to right, rgba(15, 23, 42, 0.04) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(15, 23, 42, 0.04) 1px, transparent 1px);
+/* Utility for hiding scrollbars in horizontal scroll lists */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Safe area insets for mobile devices */
+.safe-bottom-padding {
+  padding-bottom: max(1rem, env(safe-area-inset-bottom));
+}
+
+.safe-bottom-fixed {
+  bottom: 0;
+  padding-bottom: env(safe-area-inset-bottom, 0px);
 }
