@@ -33,14 +33,13 @@ export function TopScorersAndClubs() {
 
             <div className="bg-[#FFFFFF] border border-[#E5E7EB] rounded-2xl overflow-hidden shadow-sm">
               <div className="overflow-x-auto no-scrollbar">
-                <table className="w-full text-left text-xs min-w-[440px]">
+                <table className="w-full text-left text-xs">
                   <thead className="bg-[#F7F8FA] text-[#5F6368] font-bold uppercase text-[10px] tracking-wider border-b border-[#E5E7EB]">
                     <tr>
-                      <th className="py-2.5 px-3.5 text-center w-10">#</th>
-                      <th className="py-2.5 px-3.5">Player</th>
-                      <th className="py-2.5 px-3.5">Club</th>
-                      <th className="py-2.5 px-3.5 text-center">Matches</th>
-                      <th className="py-2.5 px-3.5 text-right font-black text-[#111111]">Goals</th>
+                      <th className="py-2.5 px-3 text-center w-8">#</th>
+                      <th className="py-2.5 px-3">Player</th>
+                      <th className="py-2.5 px-3">Club</th>
+                      <th className="py-2.5 px-3 text-right font-black text-[#111111]">Goals</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-[#F7F8FA]">
@@ -49,17 +48,25 @@ export function TopScorersAndClubs() {
                         key={s.rank}
                         className="hover:bg-[#F7F8FA]/70 transition-colors group"
                       >
-                        <td className="py-2.5 px-3.5 text-center font-bold text-[#5F6368] group-hover:text-[#111111]">
+                        <td className="py-2.5 px-3 text-center font-bold text-[#5F6368] group-hover:text-[#111111]">
                           {s.rank === 1 ? (
-                            <span className="inline-flex w-5 h-5 rounded-full bg-[#C79A3B] text-black text-[10px] font-black items-center justify-center">
+                            <span className="inline-flex w-5 h-5 rounded-full bg-[#F59E0B] text-black text-[10px] font-black items-center justify-center shadow-xs">
                               1
                             </span>
+                          ) : s.rank === 2 ? (
+                            <span className="inline-flex w-5 h-5 rounded-full bg-[#E5E7EB] text-black text-[10px] font-black items-center justify-center shadow-xs">
+                              2
+                            </span>
+                          ) : s.rank === 3 ? (
+                            <span className="inline-flex w-5 h-5 rounded-full bg-[#D97706] text-white text-[10px] font-black items-center justify-center shadow-xs">
+                              3
+                            </span>
                           ) : (
-                            s.rank
+                            <span className="text-[11px] font-bold text-[#6B7280]">{s.rank}</span>
                           )}
                         </td>
-                        <td className="py-2.5 px-3.5 font-bold text-[#111111]">
-                          <div className="flex items-center space-x-2.5">
+                        <td className="py-2.5 px-3 font-bold text-[#111111]">
+                          <div className="flex items-center space-x-2">
                             <div className="w-6 h-6 rounded-full overflow-hidden bg-[#F7F8FA] border border-[#E5E7EB] relative shrink-0">
                               <Image
                                 src={s.avatar}
@@ -68,12 +75,11 @@ export function TopScorersAndClubs() {
                                 className="object-cover"
                               />
                             </div>
-                            <span className="truncate max-w-[140px] sm:max-w-[180px]">{s.playerName}</span>
+                            <span className="truncate max-w-[120px] sm:max-w-[160px]">{s.playerName}</span>
                           </div>
                         </td>
-                        <td className="py-2.5 px-3.5 text-[#5F6368] font-semibold">{s.clubShort}</td>
-                        <td className="py-2.5 px-3.5 text-center text-[#5F6368] font-mono">{s.matches}</td>
-                        <td className="py-2.5 px-3.5 text-right font-black text-[#111111] font-mono text-sm">
+                        <td className="py-2.5 px-3 text-[#5F6368] font-bold text-[11px]">{s.clubShort}</td>
+                        <td className="py-2.5 px-3 text-right font-black text-[#111111] font-mono text-sm">
                           {s.goals}
                         </td>
                       </tr>

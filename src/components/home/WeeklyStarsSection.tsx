@@ -98,13 +98,13 @@ export function WeeklyStarsSection() {
           </Link>
         </div>
 
-        {/* 6-Card Grid: Horizontal Scroll on Mobile, 3 Cols on Tablet, 6 Cols on Desktop */}
-        <div className="flex overflow-x-auto md:grid md:grid-cols-3 lg:grid-cols-6 gap-3.5 sm:gap-4 no-scrollbar snap-x snap-mandatory -mx-4 px-4 sm:mx-0 sm:px-0 pb-1">
+        {/* 6-Card Grid: 2 Cols on Mobile (Screen 5), 3 Cols on Tablet, 6 Cols on Desktop */}
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4">
           {weeklyStars.map((star: WeeklyStarItem) => (
             <Link
               key={star.id}
               href={`/players/${star.playerName.toLowerCase().replace(/\s+/g, "_")}`}
-              className="group w-[165px] sm:w-[185px] shrink-0 md:w-auto md:shrink snap-start bg-white border border-[#E5E7EB] hover:border-[#111111] rounded-2xl p-3.5 sm:p-4 flex flex-col justify-between transition-all duration-300 shadow-sm hover:shadow-md"
+              className="group bg-white border border-[#E5E7EB] hover:border-[#111111] rounded-2xl p-3 sm:p-4 flex flex-col justify-between transition-all duration-300 shadow-sm hover:shadow-md h-full"
             >
               {/* Category Header */}
               <div className="flex items-center space-x-1.5 text-xs font-bold text-[#111111] mb-2.5">

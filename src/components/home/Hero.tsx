@@ -72,17 +72,17 @@ export function Hero() {
           </div>
         </div>
 
-        {/* Hero Stats Grid Underneath: 2x2 on mobile, 4 columns on lg */}
-        <div className="mt-3 sm:mt-4 grid grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-3">
+        {/* Hero Stats Grid Underneath: 4 columns across all viewports */}
+        <div className="mt-3 sm:mt-4 grid grid-cols-4 gap-2 sm:gap-3">
           {hero.stats.map((stat, idx) => (
             <div
               key={idx}
-              className="bg-[#FFFFFF] border border-[#E5E7EB] rounded-xl p-3.5 sm:p-5 flex flex-col justify-center items-center sm:items-start transition-all hover:border-[#111111] shadow-sm min-h-[72px]"
+              className="bg-[#FFFFFF] border border-[#E5E7EB] rounded-xl p-2 sm:p-4 lg:p-5 flex flex-col justify-center items-center transition-all hover:border-[#111111] shadow-sm min-h-[64px] sm:min-h-[72px]"
             >
-              <div className="text-xl sm:text-3xl font-extrabold text-[#111111] tracking-tight font-sans">
+              <div className="text-base sm:text-2xl lg:text-3xl font-black text-[#111111] tracking-tight font-sans">
                 {stat.value}
               </div>
-              <div className="text-[10px] sm:text-xs font-semibold text-[#5F6368] uppercase tracking-wider mt-0.5">
+              <div className="text-[9px] sm:text-xs font-semibold text-[#5F6368] uppercase tracking-wider mt-0.5 text-center truncate w-full">
                 {stat.label}
               </div>
             </div>

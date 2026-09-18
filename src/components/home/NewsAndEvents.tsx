@@ -58,8 +58,9 @@ export function NewsAndEvents() {
               </Link>
             </div>
 
-            {/* 3 News Cards in 1 row on tablet/desktop */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3.5 sm:gap-4 flex-1 items-stretch">
+            {/* News Cards: Mobile Featured + 2 Compact Rows; Desktop 3 Equal Columns */}
+            {/* Desktop View (sm and above) */}
+            <div className="hidden sm:grid sm:grid-cols-3 gap-3.5 sm:gap-4 flex-1 items-stretch">
               {news.map((item: NewsItem) => (
                 <Link
                   key={item.id}
@@ -82,6 +83,60 @@ export function NewsAndEvents() {
                       {item.title}
                     </h3>
                     <div className="text-[11px] text-[#6B7280] font-medium pt-3 mt-auto">
+                      {item.date}
+                    </div>
+                  </div>
+                </Link>
+              ))}
+            </div>
+
+            {/* Mobile View (below sm) matching Screen 6 */}
+            <div className="sm:hidden space-y-3">
+              {/* Featured First News */}
+              {news.length > 0 && (
+                <Link
+                  href={`/news/${news[0].id}`}
+                  className="block bg-white border border-[#E5E7EB] rounded-2xl overflow-hidden shadow-sm"
+                >
+                  <div className="relative aspect-[16/9] w-full bg-[#F7F8FA] overflow-hidden">
+                    <Image
+                      src={news[0].image}
+                      alt={news[0].title}
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+                  <div className="p-3.5">
+                    <h3 className="text-sm font-black text-[#111111] leading-snug line-clamp-2">
+                      {news[0].title}
+                    </h3>
+                    <div className="text-[11px] text-[#6B7280] font-medium mt-2">
+                      {news[0].date}
+                    </div>
+                  </div>
+                </Link>
+              )}
+
+              {/* Compact Next 2 News Items */}
+              {news.slice(1, 3).map((item: NewsItem) => (
+                <Link
+                  key={item.id}
+                  href={`/news/${item.id}`}
+                  className="flex items-center space-x-3 bg-white border border-[#E5E7EB] rounded-xl p-2.5 shadow-sm"
+                >
+                  <div className="w-16 h-14 rounded-lg overflow-hidden relative shrink-0 bg-[#F7F8FA]">
+                    <Image
+                      src={item.image}
+                      alt={item.title}
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+                  <div className="min-w-0 flex-1">
+                    <h4 className="text-xs font-bold text-[#111111] leading-tight line-clamp-2">
+                      {item.title}
+                    </h4>
+                    <div className="text-[10px] text-[#6B7280] font-medium mt-1">
                       {item.date}
                     </div>
                   </div>

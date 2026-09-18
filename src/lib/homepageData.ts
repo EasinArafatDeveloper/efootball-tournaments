@@ -345,11 +345,11 @@ export const homepageData = {
     },
   ],
   topScorers: [
-    { rank: 1, playerName: "Mahim Haider", clubShort: "DDE", avatar: "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?w=100", goals: 64, matches: 28 },
-    { rank: 2, playerName: "Tanvir Ahmed", clubShort: "NEX", avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100", goals: 58, matches: 26 },
-    { rank: 3, playerName: "Prasen Jit", clubShort: "CCK", avatar: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=100", goals: 51, matches: 25 },
-    { rank: 4, playerName: "Arafat Hossain", clubShort: "SYS", avatar: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=100", goals: 46, matches: 24 },
-    { rank: 5, playerName: "Saif Ahmed", clubShort: "LGN", avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100", goals: 42, matches: 22 },
+    { rank: 1, playerName: "Prasen Jit", clubShort: "TITANS", avatar: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=100", goals: 18, matches: 8 },
+    { rank: 2, playerName: "Rahat Khan", clubShort: "NEXA FC", avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100", goals: 15, matches: 8 },
+    { rank: 3, playerName: "Saif Ahmed", clubShort: "RISING BD", avatar: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=100", goals: 14, matches: 7 },
+    { rank: 4, playerName: "Fahim Islam", clubShort: "DHAKA XI", avatar: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=100", goals: 13, matches: 7 },
+    { rank: 5, playerName: "Tanzim Rafi", clubShort: "CHITTAGONG", avatar: "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=100", goals: 12, matches: 6 },
   ],
   clubRankings: [
     { rank: 1, clubName: "Dhaka Dynamos", shortName: "DDE", logo: "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=100", played: 14, won: 12, draw: 1, lost: 1, points: 37 },
