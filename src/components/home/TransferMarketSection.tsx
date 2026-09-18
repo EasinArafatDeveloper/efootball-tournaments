@@ -2,35 +2,42 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight, DollarSign, TrendingUp, Sparkles, UserCheck } from "lucide-react";
+import { ArrowRight, Zap } from "lucide-react";
 import { homepageData, TransferPlayerItem } from "@/lib/homepageData";
 
 export function TransferMarketSection() {
   const { transferPlayers } = homepageData;
 
-  const getStatusBadge = (status: string) => {
-    switch (status) {
+  const renderStatus = (status: string) => {
+    switch (status.toUpperCase()) {
       case "FREE AGENT":
         return (
-          <span className="px-1.5 py-0.5 rounded text-[10px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">
-            FREE AGENT
+          <div className="flex items-center space-x-1 text-[11px] font-bold text-[#D97706]">
+            <Zap className="w-3 h-3 fill-[#D97706]" />
+            <span>FREE AGENT</span>
+          </div>
+        );
+      case "UNDER CONTRACT":
+        return (
+          <span className="text-[11px] font-bold text-[#2563EB]">
+            Under Contract
           </span>
         );
       case "TRANSFER LISTED":
         return (
-          <span className="px-1.5 py-0.5 rounded text-[10px] font-bold bg-amber-50 text-amber-800 border border-amber-200">
-            LISTED
+          <span className="text-[11px] font-bold text-[#4B5563]">
+            Transfer Listed
           </span>
         );
       case "UNDER TERMINATION":
         return (
-          <span className="px-1.5 py-0.5 rounded text-[10px] font-bold bg-rose-50 text-rose-700 border border-rose-200">
-            EXPIRING
+          <span className="text-[11px] font-bold text-[#DC2626]">
+            Under Termination
           </span>
         );
       default:
         return (
-          <span className="px-1.5 py-0.5 rounded text-[10px] font-bold bg-slate-100 text-slate-700">
+          <span className="text-[11px] font-bold text-[#6B7280]">
             {status}
           </span>
         );
@@ -44,102 +51,102 @@ export function TransferMarketSection() {
         {/* Section Header */}
         <div className="flex items-center justify-between pb-4">
           <div className="flex items-center space-x-2.5">
-            <h2 className="text-base sm:text-lg font-bold text-[#111111]">
+            <h2 className="text-xl sm:text-2xl font-black text-[#111111] tracking-tight">
               Transfer Market
             </h2>
-            <div className="inline-flex items-center space-x-1.5 px-2 py-0.5 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-700 text-[11px] font-bold">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+            <div className="inline-flex items-center space-x-1.5 px-2.5 py-0.5 rounded-full bg-[#E6F4EA] border border-[#CEEAD6] text-[#137333] text-xs font-bold">
+              <span className="w-2 h-2 rounded-full bg-[#137333]"></span>
               <span>Open Now</span>
             </div>
           </div>
 
           <Link
             href="/transfer-market"
-            className="inline-flex items-center space-x-1 text-xs font-semibold text-[#111111] hover:text-[#C79A3B] transition-colors"
+            className="inline-flex items-center space-x-1 text-xs sm:text-sm font-semibold text-[#111111] hover:text-[#C79A3B] transition-colors"
           >
             <span>View All</span>
             <ArrowRight className="w-3.5 h-3.5" />
           </Link>
         </div>
 
-        {/* Section Content: Player Cards (Left) + Promo Banner (Right on Desktop, Below on Mobile) */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 items-stretch">
+        {/* Section Content: 5 Player Cards + 1 Promo Card in ONE Row on Desktop */}
+        <div className="flex overflow-x-auto lg:grid lg:grid-cols-7 gap-3.5 sm:gap-4 no-scrollbar snap-x snap-mandatory -mx-4 px-4 sm:mx-0 sm:px-0 pb-1 items-stretch">
           
-          {/* Player Cards: Horizontal Snap-Scroll on Mobile, Grid on Tablet/Desktop (8 Cols) */}
-          <div className="lg:col-span-8 flex overflow-x-auto sm:grid sm:grid-cols-2 md:grid-cols-3 gap-3 no-scrollbar snap-x snap-mandatory -mx-4 px-4 sm:mx-0 sm:px-0 pb-1">
-            {transferPlayers.slice(0, 6).map((player: TransferPlayerItem) => (
-              <div
-                key={player.id}
-                className="w-[160px] sm:w-auto shrink-0 snap-start bg-[#FFFFFF] border border-[#E5E7EB] hover:border-[#111111] rounded-xl p-3 sm:p-3.5 flex flex-col justify-between transition-all shadow-sm hover:shadow-md"
-              >
-                <div className="flex items-start justify-between">
-                  <div className="flex items-center space-x-2.5">
-                    <div className="w-10 h-10 rounded-full overflow-hidden bg-[#F7F8FA] border border-[#E5E7EB] relative shrink-0">
-                      <Image
-                        src={player.avatar}
-                        alt={player.name}
-                        fill
-                        className="object-cover"
-                      />
-                    </div>
-                    <div>
-                      <div className="text-xs font-bold text-[#111111] flex items-center space-x-1">
-                        <span className="truncate max-w-[85px] sm:max-w-[100px]">{player.name}</span>
-                        <span className="text-[11px]">{player.flag}</span>
-                      </div>
-                      <div className="text-[10px] text-[#5F6368] font-medium truncate max-w-[110px]">
-                        {player.position}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="mt-3 pt-2.5 border-t border-[#F7F8FA] flex items-center justify-between">
-                  <div>{getStatusBadge(player.status)}</div>
-                  <div className="text-right">
-                    <span className="text-[9px] sm:text-[10px] text-[#5F6368] block leading-none">Valuation</span>
-                    <span className="text-xs font-black text-[#111111] font-mono">{player.marketValue}</span>
-                  </div>
-                </div>
+          {/* 5 Player Cards */}
+          {transferPlayers.map((player: TransferPlayerItem) => (
+            <Link
+              key={player.id}
+              href={`/players/${player.name.toLowerCase().replace(/\s+/g, "_")}`}
+              className="group w-[155px] sm:w-[170px] shrink-0 lg:w-auto lg:shrink lg:col-span-1 snap-start bg-white border border-[#E5E7EB] hover:border-[#111111] rounded-2xl p-3 sm:p-3.5 flex flex-col justify-between transition-all duration-300 shadow-sm hover:shadow-md"
+            >
+              {/* Portrait Image Container */}
+              <div className="relative w-full h-32 sm:h-36 rounded-xl overflow-hidden bg-gradient-to-b from-[#F3F4F6] to-[#E5E7EB] flex items-end justify-center mb-2.5">
+                <Image
+                  src={player.avatar}
+                  alt={player.name}
+                  fill
+                  className="object-cover object-top group-hover:scale-105 transition-transform duration-300"
+                />
               </div>
-            ))}
-          </div>
 
-          {/* Large Promo Card: Full Width on Mobile/Tablet Below Cards, 4 Cols on Desktop */}
-          <div className="lg:col-span-4 rounded-2xl bg-[#111111] text-white p-6 sm:p-7 flex flex-col justify-between relative overflow-hidden shadow-md min-h-[220px]">
-            {/* Subtle background graphic */}
-            <div className="absolute right-0 bottom-0 opacity-20 w-48 h-48 pointer-events-none">
-              <Image
-                src="/images/hero-banner-dark.png"
-                alt="Transfer Star"
-                fill
-                className="object-cover object-right"
-              />
+              {/* Player Name with Flag */}
+              <div className="flex items-center space-x-1.5 mb-1 min-w-0">
+                <span className="text-xs shrink-0">{player.flag || "🇧🇩"}</span>
+                <span className="text-xs sm:text-sm font-black text-[#111111] truncate group-hover:text-black">
+                  {player.name}
+                </span>
+              </div>
+
+              {/* Status Indicator */}
+              <div className="mb-1.5 truncate">
+                {renderStatus(player.status)}
+              </div>
+
+              {/* Market Value */}
+              <div className="text-base sm:text-lg font-black text-[#111111] font-mono tracking-tight leading-none pt-1 border-t border-[#F3F4F6]">
+                {player.marketValue}
+              </div>
+            </Link>
+          ))}
+
+          {/* Promo Card: 'Find Your Next Star' (Takes 2 cols on desktop) */}
+          <div className="w-[280px] sm:w-[320px] shrink-0 lg:w-auto lg:shrink lg:col-span-2 snap-start bg-white border border-[#E5E7EB] hover:border-[#111111] rounded-2xl p-5 sm:p-6 flex flex-col justify-between relative overflow-hidden shadow-sm hover:shadow-md transition-all min-h-[220px]">
+            
+            {/* Background Athlete Graphic */}
+            <div className="absolute right-0 bottom-0 top-0 w-[45%] pointer-events-none overflow-hidden flex items-end justify-end">
+              <div className="relative w-full h-full">
+                <Image
+                  src="/images/hero-player.png"
+                  alt="Transfer athlete"
+                  fill
+                  className="object-cover object-top opacity-90"
+                />
+                <div className="absolute inset-0 bg-gradient-to-r from-white via-white/80 to-transparent"></div>
+              </div>
             </div>
 
-            <div className="relative z-10 space-y-2.5 sm:space-y-3">
-              <div className="inline-flex items-center space-x-1.5 px-2.5 py-1 rounded-md text-[10px] font-bold uppercase bg-white/10 text-slate-200 border border-white/20">
-                <Sparkles className="w-3 h-3 text-[#C79A3B]" />
-                <span>Squad Building</span>
-              </div>
-              <h3 className="text-xl sm:text-2xl lg:text-3xl font-black text-white leading-tight">
-                Find Your <br className="hidden sm:inline" />
-                <span className="text-[#C79A3B]">Next Star</span>
+            {/* Promo Content */}
+            <div className="relative z-10 space-y-1.5 max-w-[65%]">
+              <h3 className="text-xl sm:text-2xl font-black text-[#111111] leading-tight tracking-tight">
+                Find Your <br />
+                Next Star
               </h3>
-              <p className="text-xs text-slate-300 font-normal leading-relaxed max-w-xs sm:max-w-none">
-                Search verified athlete portfolios, compare market valuations, and negotiate buyout proposals.
+              <p className="text-xs text-[#5F6368] font-medium leading-relaxed mt-2">
+                Search players, compare value and build your dream squad.
               </p>
             </div>
 
-            <div className="relative z-10 pt-5 sm:pt-6">
+            {/* Action Button */}
+            <div className="relative z-10 pt-4">
               <Link
                 href="/transfer-market"
-                className="w-full sm:w-auto inline-flex items-center justify-center space-x-2 px-5 py-3 sm:py-2.5 rounded-lg text-xs font-bold bg-white text-[#111111] hover:bg-slate-100 transition-all shadow-sm min-h-[48px] sm:min-h-[40px]"
+                className="inline-flex items-center space-x-1.5 px-4 py-2.5 rounded-xl bg-[#111111] text-white text-xs font-bold hover:bg-zinc-800 transition-all shadow-sm active:scale-95"
               >
                 <span>Browse Transfer Market</span>
-                <ArrowRight className="w-3.5 h-3.5" />
+                <ArrowRight className="w-3.5 h-3.5 text-white" />
               </Link>
             </div>
+
           </div>
 
         </div>

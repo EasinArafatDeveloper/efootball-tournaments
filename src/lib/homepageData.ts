@@ -84,10 +84,10 @@ export interface TransferPlayerItem {
   country: string;
   flag: string;
   avatar: string;
-  status: "FREE AGENT" | "TRANSFER LISTED" | "UNDER TERMINATION";
+  status: string;
   marketValue: string;
-  formerClub: string;
-  position: string;
+  formerClub?: string;
+  position?: string;
 }
 
 export interface NewsItem {
@@ -359,58 +359,48 @@ export const homepageData = {
   transferPlayers: [
     {
       id: "tr-1",
-      name: "Mahim Haider",
+      name: "Arif Hasan",
       country: "Bangladesh",
       flag: "🇧🇩",
-      avatar: "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?w=200",
-      status: "FREE AGENT" as const,
-      marketValue: "$200M",
-      formerClub: "Dhaka Dynamos",
-      position: "CF · Center Forward",
+      avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&auto=format&fit=crop&q=80",
+      status: "FREE AGENT",
+      marketValue: "$ 120M",
     },
     {
       id: "tr-2",
-      name: "Tanvir Ahmed",
+      name: "Naim Uddin",
       country: "Bangladesh",
       flag: "🇧🇩",
-      avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=200",
-      status: "TRANSFER LISTED" as const,
-      marketValue: "$150M",
-      formerClub: "NEXA FC",
-      position: "SS · Second Striker",
+      avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&auto=format&fit=crop&q=80",
+      status: "Under Contract",
+      marketValue: "$ 200M",
     },
     {
       id: "tr-3",
-      name: "Prasen Jit",
+      name: "Sabbir Hossain",
       country: "Bangladesh",
       flag: "🇧🇩",
-      avatar: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=200",
-      status: "TRANSFER LISTED" as const,
-      marketValue: "$120M",
-      formerClub: "Chittagong Kings",
-      position: "AMF · Attacking Mid",
+      avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&auto=format&fit=crop&q=80",
+      status: "Transfer Listed",
+      marketValue: "$ 150M",
     },
     {
       id: "tr-4",
-      name: "Arafat Hossain",
+      name: "Riud Karim",
       country: "Bangladesh",
       flag: "🇧🇩",
-      avatar: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=200",
-      status: "UNDER TERMINATION" as const,
-      marketValue: "$110M",
-      formerClub: "Sylhet Strikers",
-      position: "CMF · Center Mid",
+      avatar: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=400&auto=format&fit=crop&q=80",
+      status: "Under Termination",
+      marketValue: "$ 90M",
     },
     {
       id: "tr-5",
-      name: "Siam Chowdhury",
+      name: "Imtiaz Fahim",
       country: "Bangladesh",
       flag: "🇧🇩",
-      avatar: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=200",
-      status: "TRANSFER LISTED" as const,
-      marketValue: "$90M",
-      formerClub: "Rajshahi Royals",
-      position: "RWF · Right Wing",
+      avatar: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=400&auto=format&fit=crop&q=80",
+      status: "FREE AGENT",
+      marketValue: "$ 110M",
     },
   ],
   news: [
