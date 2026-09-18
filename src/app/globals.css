@@ -33,13 +33,23 @@
     --ring: 222 47% 11%;
     --radius: 0.75rem;
   }
-}
 
-body {
-  background-color: #f8fafc;
-  color: #09090b;
-  font-feature-settings: "rlig" 1, "calt" 1;
-  overflow-x: hidden;
+  body {
+    font-family: var(--font-sans), system-ui, sans-serif;
+    background-color: #ffffff;
+    color: #111111;
+    font-feature-settings: "rlig" 1, "calt" 1;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4, h5, h6, .font-heading {
+    font-family: var(--font-outfit), var(--font-sans), sans-serif;
+    letter-spacing: -0.025em;
+  }
+
+  code, pre, .font-mono {
+    font-family: var(--font-mono), monospace;
+  }
 }
 
 /* Custom Scrollbar */
