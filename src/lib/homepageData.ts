@@ -33,6 +33,7 @@ export interface TournamentItem {
   groupsCount?: number;
   status: string;
   featured?: boolean;
+  badgeType?: string;
 }
 
 export interface ActivityItem {
@@ -191,7 +192,7 @@ export const homepageData = {
     name: "Nexa Pro League 2025",
     season: "Season 1",
     subtitle: "Championship Tier · 24 National Franchises",
-    image: "https://images.unsplash.com/photo-1511512578047-dfb367046420?w=800&auto=format&fit=crop&q=80",
+    image: "/images/trophy-gold.jpg",
     playedMatches: 115,
     totalMatches: 168,
     progressPercent: 68,
@@ -203,16 +204,18 @@ export const homepageData = {
     {
       id: "tourn-nat-cup",
       name: "National Cup 2025",
-      subtitle: "Knockout · 32 Teams",
+      subtitle: "Knockout • 32 Teams",
       type: "Knockout",
       status: "Quarter-Finals",
+      badgeType: "shield-green",
     },
     {
       id: "tourn-comm-series",
       name: "Community Series",
-      subtitle: "Open · All Players",
+      subtitle: "Open • All Players",
       type: "Open",
       status: "Registration Open",
+      badgeType: "circle-teal",
     },
     {
       id: "tourn-univ-league",
@@ -220,6 +223,7 @@ export const homepageData = {
       subtitle: "Inter-University",
       type: "Collegiate",
       status: "Group Stage",
+      badgeType: "trophy-slate",
     },
     {
       id: "tourn-club-battle",
@@ -227,6 +231,7 @@ export const homepageData = {
       subtitle: "Top Clubs",
       type: "Invitational",
       status: "Starting Soon",
+      badgeType: "shield-purple",
     },
   ],
   activities: [
@@ -235,7 +240,7 @@ export const homepageData = {
       type: "MATCH" as const,
       text: "Rahat Khan won a match against Farhan",
       highlight: "Rahat Khan (3 - 1)",
-      time: "2m ago",
+      time: "2 minutes ago",
       avatar: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=100&auto=format&fit=crop&q=80",
     },
     {
@@ -243,7 +248,7 @@ export const homepageData = {
       type: "SIGNING" as const,
       text: "NEXA FC signed a new player",
       highlight: "Tanvir Ahmed (@tanvir_pro)",
-      time: "15m ago",
+      time: "15 minutes ago",
       avatar: "https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?w=100&auto=format&fit=crop&q=80",
     },
     {
@@ -251,7 +256,7 @@ export const homepageData = {
       type: "AWARD" as const,
       text: "Prasen Jit was awarded Man of the Match",
       highlight: "MOTM Award · 2 Goals, 1 Assist",
-      time: "32m ago",
+      time: "1 hour ago",
       avatar: "https://images.unsplash.com/photo-1527980965255-d3b416303d12?w=100&auto=format&fit=crop&q=80",
     },
     {
@@ -259,7 +264,7 @@ export const homepageData = {
       type: "REGISTRATION" as const,
       text: "DHAKA XI registered for National Cup",
       highlight: "National Cup 2025 Entry",
-      time: "1h ago",
+      time: "3 hours ago",
       avatar: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=100&auto=format&fit=crop&q=80",
     },
     {
@@ -267,7 +272,7 @@ export const homepageData = {
       type: "TRANSFER" as const,
       text: "Transfer: Saif Ahmed joined LEGION",
       highlight: "Undisclosed Fee · 2-Year Deal",
-      time: "2h ago",
+      time: "5 hours ago",
       avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&auto=format&fit=crop&q=80",
     },
   ],
