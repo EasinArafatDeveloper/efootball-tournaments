@@ -133,8 +133,8 @@ export const homepageData = {
   liveMatches: [
     {
       id: "live-1",
-      tournament: "Nexa Pro League 2025",
-      minute: "78'",
+      tournament: "Pro League 2025",
+      minute: "45'",
       status: "LIVE" as const,
       homeClub: {
         name: "NEXA FC",
@@ -151,8 +151,8 @@ export const homepageData = {
     },
     {
       id: "live-2",
-      tournament: "National Cup 2025",
-      minute: "45'",
+      tournament: "Community Series",
+      minute: "23'",
       status: "LIVE" as const,
       homeClub: {
         name: "LEGION",
@@ -169,8 +169,8 @@ export const homepageData = {
     },
     {
       id: "live-3",
-      tournament: "Premier Division BD",
-      minute: "62'",
+      tournament: "National Cup",
+      minute: "78'",
       status: "LIVE" as const,
       homeClub: {
         name: "DHAKA XI",
