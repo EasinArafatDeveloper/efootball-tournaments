@@ -1,0 +1,210 @@
+"use client";
+
+import { useState } from "react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { User, Mail, Lock, Smartphone, Shield, ArrowRight, CheckCircle2 } from "lucide-react";
+import { PLAYER_POSITIONS, PLAY_STYLES, DEVICE_MODELS } from "@/lib/constants";
+
+export default function RegisterPage() {
+  const router = useRouter();
+  const [formData, setFormData] = useState({
+    fullName: "",
+    username: "",
+    email: "",
+    password: "",
+    konamiId: "",
+    deviceModel: DEVICE_MODELS[0],
+    preferredPosition: "CF",
+    playStyle: "Quick Counter",
+    facebookProfile: "",
+    bio: "",
+  });
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError("");
+    setLoading(true);
+
+    try {
+      const res = await fetch("/api/auth/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      const json = await res.json();
+      if (json.success) {
+        window.location.href = "/dashboard";
+      } else {
+        setError(json.error?.message || "Registration failed.");
+      }
+    } catch (err) {
+      setError("An error occurred during registration. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <div className="min-h-[80vh] flex items-center justify-center px-4 py-12">
+      <div className="w-full max-w-2xl space-y-6">
+        
+        {/* Header */}
+        <div className="text-center space-y-2">
+          <h1 className="text-2xl sm:text-3xl font-black text-slate-950">Register as eFootball Athlete</h1>
+          <p className="text-xs text-slate-500">Join the official Bangladesh eFootball Championship and get an accredited Elo ranking</p>
+        </div>
+
+        {/* Card */}
+        <div className="rounded-3xl bg-white border border-slate-200 p-8 shadow-sm space-y-5">
+          {error && (
+            <div className="p-3 rounded-xl bg-rose-50 border border-rose-200 text-rose-700 text-xs font-semibold">
+              {error}
+            </div>
+          )}
+
+          <form onSubmit={handleSubmit} className="space-y-4 text-xs">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-slate-700 font-bold mb-1">Full Legal Name *</label>
+                <input
+                  type="text"
+                  placeholder="e.g. Mahim Haider"
+                  value={formData.fullName}
+                  onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
+                  className="w-full px-3 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 placeholder-slate-400 focus:outline-none focus:border-black focus:bg-white text-xs"
+                  required
+                />
+              </div>
+
+              <div>
+                <label className="block text-slate-700 font-bold mb-1">Handle / Username *</label>
+                <input
+                  type="text"
+                  placeholder="e.g. mahim_striker"
+                  value={formData.username}
+                  onChange={(e) => setFormData({ ...formData, username: e.target.value })}
+                  className="w-full px-3 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 placeholder-slate-400 focus:outline-none focus:border-black focus:bg-white text-xs"
+                  required
+                />
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-slate-700 font-bold mb-1">Email Address *</label>
+                <input
+                  type="email"
+                  placeholder="athlete@example.com"
+                  value={formData.email}
+                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                  className="w-full px-3 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 placeholder-slate-400 focus:outline-none focus:border-black focus:bg-white text-xs"
+                  required
+                />
+              </div>
+
+              <div>
+                <label className="block text-slate-700 font-bold mb-1">Password (min 8 chars) *</label>
+                <input
+                  type="password"
+                  placeholder="••••••••••••"
+                  value={formData.password}
+                  onChange={(e) => setFormData({ ...formData, password: e.target.value })}
+                  className="w-full px-3 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 placeholder-slate-400 focus:outline-none focus:border-black focus:bg-white text-xs"
+                  required
+                  minLength={8}
+                />
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-slate-700 font-bold mb-1">Konami ID / In-Game UID *</label>
+                <input
+                  type="text"
+                  placeholder="e.g. 984-721-032"
+                  value={formData.konamiId}
+                  onChange={(e) => setFormData({ ...formData, konamiId: e.target.value })}
+                  className="w-full px-3 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 placeholder-slate-400 focus:outline-none focus:border-black focus:bg-white font-mono text-xs"
+                  required
+                />
+              </div>
+
+              <div>
+                <label className="block text-slate-700 font-bold mb-1">Primary Device Model *</label>
+                <select
+                  value={formData.deviceModel}
+                  onChange={(e) => setFormData({ ...formData, deviceModel: e.target.value })}
+                  className="w-full px-3 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 focus:outline-none focus:border-black focus:bg-white text-xs"
+                >
+                  {DEVICE_MODELS.map((d) => (
+                    <option key={d} value={d}>{d}</option>
+                  ))}
+                </select>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-slate-700 font-bold mb-1">Preferred Tactical Position</label>
+                <select
+                  value={formData.preferredPosition}
+                  onChange={(e) => setFormData({ ...formData, preferredPosition: e.target.value })}
+                  className="w-full px-3 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 focus:outline-none focus:border-black focus:bg-white text-xs"
+                >
+                  {PLAYER_POSITIONS.map((p) => (
+                    <option key={p} value={p}>{p}</option>
+                  ))}
+                </select>
+              </div>
+
+              <div>
+                <label className="block text-slate-700 font-bold mb-1">Preferred Play Style</label>
+                <select
+                  value={formData.playStyle}
+                  onChange={(e) => setFormData({ ...formData, playStyle: e.target.value })}
+                  className="w-full px-3 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 focus:outline-none focus:border-black focus:bg-white text-xs"
+                >
+                  {PLAY_STYLES.map((s) => (
+                    <option key={s} value={s}>{s}</option>
+                  ))}
+                </select>
+              </div>
+            </div>
+
+            <div>
+              <label className="block text-slate-700 font-bold mb-1">Facebook Profile URL (Optional)</label>
+              <input
+                type="url"
+                placeholder="https://facebook.com/username"
+                value={formData.facebookProfile}
+                onChange={(e) => setFormData({ ...formData, facebookProfile: e.target.value })}
+                className="w-full px-3 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 placeholder-slate-400 focus:outline-none focus:border-black focus:bg-white text-xs"
+              />
+            </div>
+
+            <button
+              type="submit"
+              disabled={loading}
+              className="w-full py-3.5 rounded-xl bg-black text-white font-bold text-xs hover:bg-zinc-800 shadow-sm transition-all flex items-center justify-center space-x-2 mt-2"
+            >
+              <span>{loading ? "Creating Profile..." : "Complete Registration & Get Certified"}</span>
+              <ArrowRight className="w-4 h-4" />
+            </button>
+          </form>
+
+          <div className="text-center text-xs text-slate-500 pt-2 border-t border-slate-100">
+            Already registered?{" "}
+            <Link href="/login" className="text-slate-950 font-bold hover:underline">
+              Sign In to Profile
+            </Link>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  );
+}
