@@ -66,10 +66,12 @@ export function LiveMatches() {
                   </span>
                 </div>
 
-                {/* Score Pill */}
+                {/* Score Pill: 100% Optically and Mathematically Centered */}
                 <div className="col-span-1 flex items-center justify-center">
-                  <div className="px-4 py-2 rounded-xl bg-[#F7F8FA] border border-[#E5E7EB] text-[#111111] font-mono font-black text-base sm:text-lg tracking-wider whitespace-nowrap min-w-[72px] text-center">
-                    {match.homeScore} - {match.awayScore}
+                  <div className="h-10 px-3.5 rounded-xl bg-[#F7F8FA] border border-[#E5E7EB] flex items-center justify-center space-x-2 text-[#111111] font-heading font-extrabold text-base sm:text-lg tabular-nums select-none min-w-[72px] shadow-xs">
+                    <span className="w-4 text-center leading-none">{match.homeScore}</span>
+                    <span className="text-[#888888] font-normal text-sm leading-none">-</span>
+                    <span className="w-4 text-center leading-none">{match.awayScore}</span>
                   </div>
                 </div>
 

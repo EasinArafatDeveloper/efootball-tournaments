@@ -184,14 +184,16 @@ export default function MatchCentrePage() {
                   </div>
                 </div>
 
-                {/* Central Scorebox: Never Wraps */}
+                {/* Central Scorebox: Never Wraps & Perfectly Centered */}
                 <div className="shrink-0 flex flex-col items-center justify-center px-1 sm:px-2">
                   {m.status === "FINISHED" || m.status === "LIVE" ? (
-                    <div className="px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-xl bg-[#111111] text-white font-mono font-black text-base sm:text-lg tracking-wider shadow-sm whitespace-nowrap min-w-[70px] sm:min-w-[85px] text-center">
-                      {m.result?.homeScore ?? 0} - {m.result?.awayScore ?? 0}
+                    <div className="h-10 px-3.5 sm:px-4 rounded-xl bg-[#111111] text-white flex items-center justify-center space-x-2 font-heading font-extrabold text-base sm:text-lg tabular-nums shadow-sm select-none min-w-[76px]">
+                      <span className="w-4 text-center leading-none">{m.result?.homeScore ?? 0}</span>
+                      <span className="text-slate-400 font-normal text-sm leading-none">-</span>
+                      <span className="w-4 text-center leading-none">{m.result?.awayScore ?? 0}</span>
                     </div>
                   ) : (
-                    <div className="px-3 py-1.5 rounded-xl bg-slate-100 border border-slate-300 font-mono font-bold text-xs text-slate-700 whitespace-nowrap min-w-[50px] text-center">
+                    <div className="h-9 px-4 rounded-xl bg-slate-100 border border-slate-300 flex items-center justify-center font-bold text-xs text-slate-700 min-w-[56px]">
                       VS
                     </div>
                   )}
