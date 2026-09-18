@@ -118,3 +118,23 @@ body {
   bottom: 0;
   padding-bottom: env(safe-area-inset-bottom, 0px);
 }
+
+/* Infinite Marquee Looping Animation */
+@keyframes marquee-loop {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee-loop 28s linear infinite;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
