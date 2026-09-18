@@ -175,7 +175,7 @@ export const homepageData = {
       homeClub: {
         name: "DHAKA XI",
         shortName: "DHK",
-        logo: "https://images.unsplash.com/photo-1508098682722-e99c43a406b2?w=100&auto=format&fit=crop&q=80",
+        logo: "https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=100&auto=format&fit=crop&q=80",
       },
       awayClub: {
         name: "CHITTAGONG",
