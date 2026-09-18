@@ -75,14 +75,14 @@ export default function MatchCentrePage() {
       </div>
 
       {/* Tabs & Search Filter Bar */}
-      <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+      <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-2">
         {/* Status Tabs */}
-        <div className="flex items-center space-x-2 overflow-x-auto pb-2 scrollbar-none">
+        <div className="flex items-center space-x-2 overflow-x-auto pb-1 no-scrollbar">
           {TABS.map((tab) => (
             <button
               key={tab.id}
               onClick={() => setActiveTab(tab.id)}
-              className={`px-4 py-2 rounded-xl text-xs font-bold whitespace-nowrap transition-all ${
+              className={`px-4 py-2.5 rounded-xl text-xs font-bold whitespace-nowrap transition-all ${
                 activeTab === tab.id
                   ? "bg-black text-white shadow-sm"
                   : "bg-white text-slate-700 hover:bg-slate-100 border border-slate-200"
@@ -102,13 +102,13 @@ export default function MatchCentrePage() {
               placeholder="Search player, club, round..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-9 pr-3 py-2 rounded-xl bg-white border border-slate-300 text-xs text-black placeholder-slate-400 focus:outline-none focus:border-black min-h-[44px]"
+              className="w-full pl-9 pr-3 py-2 rounded-xl bg-white border border-slate-300 text-xs text-black placeholder-slate-400 focus:outline-none focus:border-black h-10"
             />
           </div>
           <select
             value={selectedTournament}
             onChange={(e) => setSelectedTournament(e.target.value)}
-            className="px-3 py-2 rounded-xl bg-white border border-slate-300 text-xs text-black focus:outline-none focus:border-black font-medium min-h-[44px]"
+            className="px-3 py-2 rounded-xl bg-white border border-slate-300 text-xs text-black focus:outline-none focus:border-black font-medium h-10"
           >
             <option value="ALL">All Tournaments</option>
             <option value="tourn-1">National Championship 2026</option>
@@ -130,92 +130,92 @@ export default function MatchCentrePage() {
           <div className="text-xs text-slate-500">Try selecting a different filter tab or search query.</div>
         </div>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6">
           {filtered.map((m) => (
             <div
               key={m.id}
-              className={`p-4 sm:p-6 rounded-2xl border transition-all flex flex-col justify-between space-y-4 sm:space-y-5 group ${
+              className={`p-5 sm:p-6 rounded-2xl border transition-all duration-200 flex flex-col justify-between space-y-4 sm:space-y-5 group ${
                 m.status === "LIVE"
                   ? "bg-white border-rose-300 shadow-md ring-1 ring-rose-200"
                   : "bg-white border-slate-200 hover:border-black hover:shadow-md"
               }`}
             >
               {/* Header Info */}
-              <div className="flex items-center justify-between text-xs">
-                <div>
-                  <span className="font-bold text-black">{m.tournamentName}</span>
-                  <span className="text-slate-500 ml-2 font-mono">• {m.round}</span>
+              <div className="flex items-center justify-between text-xs pb-3 border-b border-slate-100">
+                <div className="min-w-0 pr-2">
+                  <span className="font-black text-[#111111]">{m.tournamentName}</span>
+                  <span className="text-slate-500 ml-2 font-mono text-[11px]">• {m.round}</span>
                 </div>
 
                 {m.status === "LIVE" ? (
-                  <span className="px-2.5 py-0.5 rounded-full bg-rose-50 text-rose-700 border border-rose-200 font-mono font-bold animate-pulse flex items-center space-x-1.5">
+                  <span className="px-2.5 py-0.5 rounded-full bg-rose-50 text-rose-700 border border-rose-200 font-mono font-bold text-[10px] animate-pulse flex items-center space-x-1 shrink-0">
                     <span className="w-1.5 h-1.5 rounded-full bg-rose-600 animate-ping"></span>
                     <span>LIVE NOW</span>
                   </span>
                 ) : m.status === "FINISHED" ? (
-                  <span className="px-2 py-0.5 rounded bg-emerald-50 text-emerald-800 border border-emerald-200 font-bold text-[10px]">
+                  <span className="px-2 py-0.5 rounded bg-emerald-50 text-emerald-800 border border-emerald-200 font-bold text-[10px] shrink-0">
                     FULL TIME
                   </span>
                 ) : (
-                  <span className="px-2 py-0.5 rounded bg-slate-100 text-slate-700 border border-slate-200 font-mono text-[10px] font-bold">
+                  <span className="px-2 py-0.5 rounded bg-slate-100 text-slate-700 border border-slate-200 font-mono text-[10px] font-bold shrink-0">
                     SCHEDULED
                   </span>
                 )}
               </div>
 
-              {/* Scoreboard Body */}
-              <div className="grid grid-cols-5 items-center text-center py-2">
-                {/* Home */}
-                <div className="col-span-2 flex flex-col items-center space-y-2">
-                  <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-slate-100 overflow-hidden border border-slate-200 p-0.5">
+              {/* Scoreboard Body: Perfectly Aligned 3-Column Layout */}
+              <div className="py-2 flex items-center justify-between gap-2 sm:gap-4">
+                {/* Home Player / Club */}
+                <div className="flex-1 flex items-center space-x-2.5 min-w-0">
+                  <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-xl bg-slate-100 overflow-hidden border border-slate-200 p-0.5 shrink-0 shadow-xs">
                     <img
                       src={m.homePlayer?.avatar || m.homeClub?.logo || "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=100"}
                       alt=""
                       className="w-full h-full object-cover rounded-lg"
                     />
                   </div>
-                  <div>
-                    <div className="text-xs sm:text-sm font-bold text-black group-hover:underline transition-colors truncate max-w-[105px] sm:max-w-[130px]">
+                  <div className="min-w-0">
+                    <div className="text-xs sm:text-sm font-black text-[#111111] group-hover:underline transition-colors truncate">
                       {m.homePlayer?.fullName || m.homeClub?.name}
                     </div>
-                    <div className="text-[10px] sm:text-[11px] text-slate-500 truncate max-w-[110px]">
-                      {m.homeClub?.shortName || "Unattached"} • {m.homePlayer?.rating ? `${m.homePlayer.rating} OVR` : ""}
+                    <div className="text-[10px] sm:text-[11px] text-slate-500 font-medium truncate mt-0.5">
+                      {m.homeClub?.shortName || "Unattached"} {m.homePlayer?.rating ? `• ${m.homePlayer.rating} OVR` : ""}
                     </div>
                   </div>
                 </div>
 
-                {/* Score / Time */}
-                <div className="col-span-1 flex flex-col items-center">
+                {/* Central Scorebox: Never Wraps */}
+                <div className="shrink-0 flex flex-col items-center justify-center px-1 sm:px-2">
                   {m.status === "FINISHED" || m.status === "LIVE" ? (
-                    <div className="text-2xl sm:text-3xl font-black text-black px-2.5 sm:px-3 py-1 rounded-xl bg-slate-100 border border-slate-300 font-mono shadow-sm">
+                    <div className="px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-xl bg-[#111111] text-white font-mono font-black text-base sm:text-lg tracking-wider shadow-sm whitespace-nowrap min-w-[70px] sm:min-w-[85px] text-center">
                       {m.result?.homeScore ?? 0} - {m.result?.awayScore ?? 0}
                     </div>
                   ) : (
-                    <div className="text-xs sm:text-sm font-mono font-bold text-slate-500 px-2 py-1 rounded bg-slate-100 border border-slate-200">
+                    <div className="px-3 py-1.5 rounded-xl bg-slate-100 border border-slate-300 font-mono font-bold text-xs text-slate-700 whitespace-nowrap min-w-[50px] text-center">
                       VS
                     </div>
                   )}
-                  <div className="text-[9px] sm:text-[10px] text-slate-500 font-mono mt-1">
+                  <div className="text-[9px] sm:text-[10px] font-mono font-bold text-slate-500 mt-1 whitespace-nowrap">
                     {m.status === "LIVE" ? "75' Live" : formatTime(m.scheduledDate)}
                   </div>
                 </div>
 
-                {/* Away */}
-                <div className="col-span-2 flex flex-col items-center space-y-2">
-                  <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-slate-100 overflow-hidden border border-slate-200 p-0.5">
+                {/* Away Player / Club */}
+                <div className="flex-1 flex items-center justify-end space-x-2.5 min-w-0 text-right">
+                  <div className="min-w-0">
+                    <div className="text-xs sm:text-sm font-black text-[#111111] group-hover:underline transition-colors truncate">
+                      {m.awayPlayer?.fullName || m.awayClub?.name}
+                    </div>
+                    <div className="text-[10px] sm:text-[11px] text-slate-500 font-medium truncate mt-0.5">
+                      {m.awayClub?.shortName || "Unattached"} {m.awayPlayer?.rating ? `• ${m.awayPlayer.rating} OVR` : ""}
+                    </div>
+                  </div>
+                  <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-xl bg-slate-100 overflow-hidden border border-slate-200 p-0.5 shrink-0 shadow-xs">
                     <img
                       src={m.awayPlayer?.avatar || m.awayClub?.logo || "https://images.unsplash.com/photo-1579952363873-27f3bade9f55?w=100"}
                       alt=""
                       className="w-full h-full object-cover rounded-lg"
                     />
-                  </div>
-                  <div>
-                    <div className="text-xs sm:text-sm font-bold text-black group-hover:underline transition-colors truncate max-w-[105px] sm:max-w-[130px]">
-                      {m.awayPlayer?.fullName || m.awayClub?.name}
-                    </div>
-                    <div className="text-[10px] sm:text-[11px] text-slate-500 truncate max-w-[110px]">
-                      {m.awayClub?.shortName || "Unattached"} • {m.awayPlayer?.rating ? `${m.awayPlayer.rating} OVR` : ""}
-                    </div>
                   </div>
                 </div>
               </div>
@@ -223,10 +223,10 @@ export default function MatchCentrePage() {
               {/* MOTM / Referee Bar */}
               {m.result?.motmPlayerName && (
                 <div className="p-2.5 rounded-xl bg-amber-50 border border-amber-200 flex items-center justify-between text-xs">
-                  <span className="text-amber-900 font-bold flex items-center">
+                  <span className="text-amber-900 font-bold flex items-center truncate">
                     ★ MOTM: {m.result.motmPlayerName}
                   </span>
-                  <span className="text-amber-800 text-[11px] truncate max-w-[200px]">{m.result.motmReason}</span>
+                  <span className="text-amber-800 text-[11px] truncate max-w-[180px] ml-2">{m.result.motmReason}</span>
                 </div>
               )}
 
@@ -238,11 +238,11 @@ export default function MatchCentrePage() {
                   {m.referee && <span className="truncate">• Ref: {m.referee.name}</span>}
                 </div>
 
-                <div className="flex items-center space-x-2">
+                <div className="flex items-center space-x-2 shrink-0">
                   {m.isOnStream && (
                     <Link
                       href={`/matches/${m.id}`}
-                      className="flex-1 xs:flex-none justify-center px-3 py-2 rounded-lg bg-rose-50 text-rose-700 border border-rose-200 font-bold hover:bg-rose-100 transition-colors flex items-center space-x-1 min-h-[44px]"
+                      className="px-3 py-1.5 rounded-lg bg-rose-50 text-rose-700 border border-rose-200 font-bold hover:bg-rose-100 transition-colors flex items-center space-x-1 min-h-[36px]"
                     >
                       <Play className="w-3 h-3 fill-rose-600" />
                       <span>Watch Stream</span>
@@ -250,7 +250,7 @@ export default function MatchCentrePage() {
                   )}
                   <Link
                     href={`/matches/${m.id}`}
-                    className="flex-1 xs:flex-none text-center px-3.5 py-2 rounded-lg bg-black text-white font-bold hover:bg-zinc-800 transition-colors shadow-sm min-h-[44px] flex items-center justify-center"
+                    className="px-4 py-1.5 rounded-lg bg-black text-white font-bold hover:bg-zinc-800 transition-colors shadow-sm min-h-[36px] flex items-center justify-center"
                   >
                     Match Details
                   </Link>
